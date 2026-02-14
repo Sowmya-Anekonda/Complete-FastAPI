@@ -1,0 +1,8 @@
+fastapi 
+uvicorn 
+authlib
+passlib[bcrypt] 
+pydantic-settings
+pytest
+httpx
+pandas
