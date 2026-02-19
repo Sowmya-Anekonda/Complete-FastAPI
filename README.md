@@ -60,3 +60,55 @@ uvicorn main:app --reload --debug
 - **CDNs:** Used to cache and serve static content globally (e.b., Cloudflare, Akamai)
 
 - **Local Memory Cache:** Python dictionaries or FastAPI **Iru_cache** decorators for lightweight scenarios.
+
+
+## Redis supports a wide variety of data structures:
+
+
+| TYPE | DESCRIPTION    | USE CASE |
+|---|---|---|
+| String | Basic key-value pair | Caching tokens |
+| List | Ordered collection  | Queues |
+| Set | Unordered collection with no duplicates | Tags |
+| Sorted Set | Sorted list with scores   | Leaderboards |
+| Hash | Key-value pairs within a key | User session info |
+| Stream | Append-only log with ID  | Event logging |
+| Pub/Sub | Publish/Subscribe messaging system | Chat app |
+| Bitmaps | Bit-level operations | User tracking |
+| HyperLogLog | Approximate unique counts  | Counting unique visitors |
+
+
+### Common use-cases of Redis:
+
+- **Caching** (e.g., ML Predictions, DB queries, External API Call)
+- **Session Management** (e.g., storing user sessions in web applications)
+- **Rate Limiting** (e.g., API throttling)
+- **Real-time Analytics** 
+- **Leaderboards and Ranking systems** (sorted sets)
+- **Pub/Sub Messaging**
+
+
+### Redis Setup
+
+1. Install Redis Server (One-time setup)
+```bash
+docker run -d -p 6379:6379 redis
+```
+2. Install Redis Python Client:
+- There're generally two options:
+    - redis-py: pip install redis
+    - aioredis: pip install redis[async]  (reommended)
+
+
+### Test Redis Setup Using Python:
+
+| Code | PURPOSE |
+| ---- | ------- |
+| redis.Redis(...) | Connects Python code to Resis |
+| .ping() | Tests the connection
+| .set(key, value) | Stores a value in Redis |
+| .get(key) | Retrieves a value | 
+| .decode() | Converts bytes to a readable string | 
+
+
+### 
