@@ -23,7 +23,7 @@ uvicorn main:app --reload --debug
 - --debug: Enables verbose output and stack traces in logs (not for production)
 
 
-## Types of Caching
+## 1. Types of Caching
 
 1. Client-side-caching : Done in browsers or frontend using mechanisms like HTTP headers (Cache-Control)
 
@@ -111,4 +111,71 @@ docker run -d -p 6379:6379 redis
 | .decode() | Converts bytes to a readable string | 
 
 
-### 
+### 2. Profiling FastAPI Apps
+
+#### 2.1 Why Profiling is important:
+1. Identify performance bottelnecks in business logic or API calls
+2. Minimize latency and maximize throughput
+3. Reduce CPU, memory usage, and I/O wait times
+4. Make informed architectural decisions (sync or async)
+5. Prepare api's for scale
+
+#### 2.2 Key metrics to observe:
+
+| METRIC | DESCRIPTION |
+| --- | --- |
+| Response Time | Total time to complete a request (latency) |
+| CPU Usage | How much CPU is consumed during the execution |
+| Memory Usage | RAM consumed by the app or request | 
+| Throughput | Number of requests served per second | 
+| Error Rate | Percentage of failed requests under the load | 
+
+
+### 2.3 Profiling tools
+- **time:** Quick & dirty timing of functions
+- **cProfile:** Built-in profiler to capture function calls & time
+- **line_profiler:** Line by line profiling
+
+#### 2.4 Profiling using **cProfile**
+- Install **snakeviz** for interactive visualization:
+    - **snakeviz** is browder-based visualization tool for python's **cProfile** output
+    - It provides interactive graphs to see how much time each function take and how functions call each other
+
+- Run **snakeviz**
+    - **snakeviz profiles\<profile_name>.prof**
+
+- pip install snakeviz
+
+### 2.4 Profilinf using **line_profiler**
+- install line_profiler **uv pip install line_profiler**
+- Run the profiler: **kernprof -l -v <name-of-your-file>.py**
+        kernprof -l -v profiling_test.py
+    - -l: line-by-line profiling
+    - -v: verbose output 
+
+
+### 3 Benchmarking Tools for API
+
+1. **wrk:**
+
+2. **ApacheBench: (ab)**
+
+3. **Locust:** Python-based Web UI 
+- Pros: 
+    - Web-based control panel
+    - Easy scenario scripting (supports logging, flows, etc..)
+    - Supports distributed testing 
+
+- Cons: 
+    - Havier than CLI tools 
+    - Slightly more setup 
+
+4. **K6:** Modern CLI, CI/CD Friendly
+- Pros:
+    - Great for automation
+    - Javascript-based scripting
+    - Detailed metrics, CI/CD integration
+    - Cloud options vailable (K6 Cloud)
+
+- Cons:
+    - Slightly complex setup for beginners.
