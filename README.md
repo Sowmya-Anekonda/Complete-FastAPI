@@ -179,3 +179,35 @@ docker run -d -p 6379:6379 redis
 
 - Cons:
     - Slightly complex setup for beginners.
+
+
+### 4. Prometheus with FastAPI
+
+- **prometheus-fastapi-instrumentator** is a plug-and-play library that enables **automatic instrumentation**
+
+- It helps collect runtime metrics (request count, latency and status code) and expose them in a **prometheus-compatible** format, typically at **/metrics** 
+
+- Installation
+    uv pip install prometheus-fastapi-instrumentator
+
+- RUN:
+    uvicorn prometheus-setup:app --reload
+
+- Run the app:
+    docker-compose up --build
+
+    - Fastapi endpoint: http://localhost:8000/
+    - Fastapi metrics: http://localhost:8000/metrics
+    - Prometheus UI: http://localhost:9090/
+
+        Run query: http_requests_total
+
+
+### 5.Configure Grafana
+- Navigate to Grafana -> Add data source -> Prometheus 
+- Set url: http://prometheus:9090 
+- Save & Test 
+- Create dashboard using metrics such as:
+    - http_server_request_total 
+    - http_request_duration_seconds_buckets 
+    - http_request_duration_seconds_s
